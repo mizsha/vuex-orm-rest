@@ -13,10 +13,6 @@ export default async function fetch(id) {
     throw new Error('No id is provided');
   }
 
-  if (!_.isNumber(id)) {
-    throw new Error('The id provided is not a number');
-  }
-
   checkConstraints(this);
 
   const data = await get(joinPath(this.apiPath, id.toString()));

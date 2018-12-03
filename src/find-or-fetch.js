@@ -6,10 +6,6 @@ export default async function findOrFetch(id) {
     throw new Error('No id is provided');
   }
 
-  if (!_.isNumber(id)) {
-    throw new Error('The id provided is not a number');
-  }
-
   checkConstraints(this);
 
   const record = this.find(id);
