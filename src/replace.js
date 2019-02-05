@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import { checkConstraints } from '@/constraint';
 
-export default function replace() {
+export default function replace({ relations = [] } = {}) {
   const { put } = this.client;
 
   if (_.isUndefined(put)) {
@@ -10,5 +10,7 @@ export default function replace() {
 
   checkConstraints(this);
 
-  put(this.apiPath(), _.omit(this.$toJson(), '$id'));
+  const path = joinPath(...relations.map(r => r.apiPath()), this.apiPath);
+
+  put(path, _.omit(this.$toJson(), '$id'));
 }
