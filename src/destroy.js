@@ -1,7 +1,8 @@
 import _ from 'lodash';
 import { checkConstraints } from '@/constraint';
+import joinPath from 'path.join';
 
-export default async function destroy() {
+export default async function destroy({ relations = [], terminus = false } = {}) {
   const { delete: destroy } = this.client;
 
   if (_.isUndefined(destroy)) {
@@ -10,6 +11,8 @@ export default async function destroy() {
 
   checkConstraints(this);
 
-  await destroy(this.apiPath());
+  const path = joinPath(...relations.map(r => r.apiPath()), terminus ? this.constructor.apiPath : this.apiPath());
+
+  await destroy(path);
   return this.$delete();
 }

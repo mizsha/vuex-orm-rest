@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import { checkConstraints } from '@/constraint';
+import joinPath from 'path.join';
 
 export default async function update(keys = Object.keys(this.$toJson())) {
   const { patch } = this.client;
