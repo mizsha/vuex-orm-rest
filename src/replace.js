@@ -10,8 +10,10 @@ export default async function replace({ keys = Object.keys(this.$toJson()), rela
   }
 
   checkConstraints(this);
+  console.log(this);
 
   const path = joinPath(...relations.map(r => r.apiPath()), terminus ? this.constructor.apiPath : this.apiPath());
+  console.log(path);
 
   const { data } = await put(path, _.omit(this.$toJson(), '$id'));
 
